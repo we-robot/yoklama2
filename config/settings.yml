@@ -1,0 +1,15 @@
+root_path: <%= ENV['ROOT_PATH'] %>
+email:
+  sandbox: sandbox@yoklama_yeni.com
+  noreply: no-reply@yoklama_yeni.com
+  admin: admin@yoklama_yeni.com
+smtp:
+  address: <%= ENV['SMTP_ADDRESS'] %>
+  port: <%= ENV['SMTP_PORT'] %>
+  enable_starttls_auto: true
+  user_name: <%= ENV['SMTP_USER_NAME'] %>
+  password: <%= ENV['SMTP_PASSWORD'] %>
+  authentication: <%= ENV['SMTP_AUTHENTICATION'] %>
+basic_auth:
+  username: yoklama_yeni
+  password: yoklama_yeni
