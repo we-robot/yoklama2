@@ -5,4 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create(email: 'admin@yoklama_yeni.com', name: 'Admin', surname: 'Admin', password: '12341234', password_confirmation: '12341234')
+Admin.create(email: 'admin@admin.com', name: 'Admin', surname: 'Admin', password: '12341234', password_confirmation: '12341234')
+
+l1 = Lesson.create(adi: "Bilgisayar Organizasyonu", ders_kodu: "BMU333", sinif: 3, teorik_saat: 3, uygulama_saati: 0, akts: 5)
+Lesson.create(adi: "Sayısal Yöntemler", ders_kodu: "BMU222", sinif: 2, teorik_saat: 3, uygulama_saati: 0, akts: 5)
+
+
+s = Student.create(name: "Alperen", surname: "bozkurt", number: 15260087)
+s.lessons << l1

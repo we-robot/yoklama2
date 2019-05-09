@@ -1,0 +1,18 @@
+-# frozen_string_literal: true
+= simple_form_for(@student) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :name, label: "Adı"
+    = f.input :surname, label: "Soyadı"
+    = f.input :number, label: "Numarası"
+    = f.association :lessons,
+                    as: :check_boxes,
+                    collection: Lesson.all, 
+                    value_method: :id,
+                    label_method: :adi,
+                    prompt: "Dersleri Seçiniz"
+
+  .form-actions
+    = f.button :submit, label: "Ekle"

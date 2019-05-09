@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  adi: MyString
+  ders_kodu: MyString
+  sinif: 1
+  teorik_saat: 1
+  uygulama_saati: 1
+  akts: 1
+
+two:
+  adi: MyString
+  ders_kodu: MyString
+  sinif: 1
+  teorik_saat: 1
+  uygulama_saati: 1
+  akts: 1

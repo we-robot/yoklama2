@@ -1,0 +1,25 @@
+%h1 Öğrenciler
+
+%table
+  %thead
+    %tr
+      %th Adı
+      %th Soyadı
+      %th Numarası
+      %th
+      %th
+      %th
+
+  %tbody
+    - @students.each do |student|
+      %tr
+        %td= student.name
+        %td= student.surname
+        %td= student.number
+        %td= link_to 'Görüntüle', student
+        %td= link_to 'Düzenle', edit_student_path(student)
+        %td= link_to 'Sil', student, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'Yeni Öğrenci', new_student_path

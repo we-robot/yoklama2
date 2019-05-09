@@ -1,0 +1,11 @@
+= show_for(@lesson) do |s|
+  = s.attribute :adi
+  = s.attribute :ders_kodu
+  = s.attribute :sinif
+  = s.attribute :teorik_saat
+  = s.attribute :uygulama_saati
+  = s.attribute :akts
+
+= link_to 'Düzenle', edit_lesson_path(@lesson)
+|
+= link_to 'Geri', lessons_path

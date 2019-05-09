@@ -1,0 +1,31 @@
+%h1 Dersler
+
+%table
+  %thead
+    %tr
+      %th Ders Adı
+      %th Ders kodu
+      %th Sinif
+      %th Teorik saat
+      %th Uygulama saati
+      %th Akts
+      %th
+      %th
+      %th
+
+  %tbody
+    - @lessons.each do |lesson|
+      %tr
+        %td= lesson.adi
+        %td= lesson.ders_kodu
+        %td= lesson.sinif
+        %td= lesson.teorik_saat
+        %td= lesson.uygulama_saati
+        %td= lesson.akts
+        %td= link_to 'Görüntüle', lesson
+        %td= link_to 'Düzenle', edit_lesson_path(lesson)
+        %td= link_to 'Sil', lesson, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'Yeni Ders', new_lesson_path

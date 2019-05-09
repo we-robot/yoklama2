@@ -1,0 +1,11 @@
+%h1 Yoklama Al
+  = simple_form_for(@inspection) do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .form-inputs
+      = f.input :week,as: :number, prompt: "Haftayı seçiniz:"
+
+      = link_to "İlerle", inspection_select_week_path, class: 'btn btn-primary'
+    .form-actions
+      = f.button :submit

@@ -1,0 +1,8 @@
+= show_for(@student) do |s|
+  = s.attribute :name
+  = s.attribute :surname
+  = s.attribute :number
+
+= link_to 'Düzenle', edit_student_path(@student)
+|
+= link_to 'Geri', students_path

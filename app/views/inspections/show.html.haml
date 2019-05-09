@@ -1,0 +1,6 @@
+= show_for(@inspection) do |s|
+  = s.association :lesson
+
+= link_to 'Edit', edit_inspection_path(@inspection)
+|
+= link_to 'Back', inspections_path

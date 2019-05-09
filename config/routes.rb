@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+
   concern :activeable do
     post :toggle_is_active, on: :member
   end
@@ -78,4 +79,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   match '*unmatched_route', to: 'application#page_not_found', via: :all unless Rails.env.development?
+
+  resources :lessons
+  resources :students
+  resources :inspections do
+    get '/select_week', to: 'inspection#select_week', as: 'select_week'
+  end
+
 end
