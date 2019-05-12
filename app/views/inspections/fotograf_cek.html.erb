@@ -1,0 +1,41 @@
+<video id="video" width="500" height="375" autoplay></video>
+<canvas id="canvas" width="500" height="375"></canvas>
+<br>
+<button class="btn btn-primary" type="button" id="snap">
+  Yoklama Al
+</button>
+
+
+<script type="text/javascript">
+// Grab elements, create settings, etc.
+var video = document.getElementById('video');
+
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  // Not adding `{ audio: true }` since we only want video now
+  navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+      //video.src = window.URL.createObjectURL(stream);
+      video.srcObject = stream;
+      video.play();
+  });
+}
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
+
+// Trigger photo take
+document.getElementById("snap").addEventListener("click", function() {
+	context.drawImage(video, 0, 0, 500, 400);
+  var dataURL = canvas.toDataURL();
+  $.ajax({
+    type: "POST",
+    url: "/inspections/<%= params[:inspection_id] %>/tani",
+    data: {
+       imgBase64: dataURL
+    }
+  }).done(function(o) {
+    console.log('saved');
+  });
+});
+</script>

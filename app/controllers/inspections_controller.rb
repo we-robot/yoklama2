@@ -21,9 +21,7 @@ class InspectionsController < ApplicationController
   end
 
   def create
-    @inspection = Inspection.new(inspection_params)
-    @inspection.save
-    respond_with(@inspection)
+    redirect_to select_week_path(inspection_params[:lesson_id])
   end
 
   def update
@@ -35,17 +33,45 @@ class InspectionsController < ApplicationController
     @inspection.destroy
     respond_with(@inspection)
   end
+  def yoklama
+    @temp = Inspection.new(inspection_params)
+    @temp.lesson_id = params[:lesson_id]
+    if params[:inspection][:lesson_type] == "Uygulama"
+      @temp.uygulama!
+      @temp.hour = params[:inspection][:uygulama_saati]
 
-  def select_week
-    
+    elsif params[:inspection][:lesson_type] == "Teorik"
+      @temp.teorik!
+      @temp.hour = params[:inspection][:teorik_saat]
+
+    end
+    lesson_type = @temp.teorik? ? 1 : 0                # 0 ise uygulama - 1 ise teorik
+    @yoklama = Inspection.where(lesson_id: @temp.lesson_id, lesson_type: lesson_type, hour: @temp.hour, week: @temp.week)
+    if @yoklama.empty?
+      @temp.save!
+      redirect_to fotograf_cek_path(@temp.id)
+    else
+      redirect_to inspection_path(@yoklama.first.id)
+    end
   end
-
+  def select_week
+    @inspection = Inspection.new(lesson_id: params['lesson_id'])
+    @teorik     = @inspection.lesson.teorik_saat
+    @uygulama   = @inspection.lesson.uygulama_saati
+  end
+  def tani
+    puts params
+    render json: { sonuc: "Tanıdı" }
+  end
+  def fotograf_cek
+    @inspection = Inspection.new()
+  end
   private
     def set_inspection
       @inspection = Inspection.find(params[:id])
     end
 
     def inspection_params
-      params.require(:inspection).permit(:lesson_id)
+      params.require(:inspection).permit(:lesson_id, :week)
     end
 end

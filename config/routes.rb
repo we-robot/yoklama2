@@ -82,8 +82,10 @@ Rails.application.routes.draw do
 
   resources :lessons
   resources :students
-  resources :inspections do
-    get '/select_week', to: 'inspection#select_week', as: 'select_week'
-  end
+  resources :inspections
+  get 'inspections/:lesson_id/select_week', to: 'inspections#select_week', as: 'select_week'
+  post 'inspections/:lesson_id/inspection', to: 'inspections#yoklama', as: 'yoklama'
+  get 'inspections/:inspection_id/cek', to: 'inspections#fotograf_cek', as: 'fotograf_cek'
+  post 'inspections/:inspection_id/tani', to: 'inspections#tani', as: 'tani'
 
 end
