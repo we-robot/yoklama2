@@ -1,10 +1,27 @@
-<video id="video" width="500" height="375" autoplay></video>
-<canvas id="canvas" width="500" height="375"></canvas>
-<br>
-<button class="btn btn-primary" type="button" id="snap">
-  Yoklama Al
-</button>
-
+<div id="yoklama_al">
+  <video id="video" width="500" height="375" autoplay></video>
+  <br>
+  <button class="btn btn-primary" type="button" id="snap">
+    Yoklama Al
+  </button>
+  <br>
+  <canvas id="canvas" width="500" height="375"></canvas>
+</div>
+<div id="loading">
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+<div id="yoklama_image">
+  <center>
+    <img id="yoklama_img" src="" alt="">
+  </center>
+</div>
+<div id="example-table"></div>
+<div id="taninmayan"></div>
+<a href="" id="yoklama_kaydet" class='btn btn-primary'>Yoklamayı Kaydet</a>
 
 <script type="text/javascript">
 // Grab elements, create settings, etc.
@@ -20,14 +37,16 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   });
 }
 
+$('#loading').hide();
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var video = document.getElementById('video');
-
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
-	context.drawImage(video, 0, 0, 500, 400);
+  context.drawImage(video, 0, 0, 500, 400);
   var dataURL = canvas.toDataURL();
+  $('#yoklama_al').hide();
+  $('#loading').show();
   $.ajax({
     type: "POST",
     url: "/inspections/<%= params[:inspection_id] %>/tani",
@@ -36,6 +55,40 @@ document.getElementById("snap").addEventListener("click", function() {
     }
   }).done(function(o) {
     console.log(o);
+    var students = o['students'];
+    var link_text = "/inspections/<%= params['inspection_id'] %>/kaydet/"
+    for(var student in students) {
+      link_text += students[student].id + ",";
+    }
+    $("#yoklama_kaydet").attr("href",link_text.substring(0, link_text.length-1));
+    
+    $("#yoklama_img").attr("src",o['image']);
+    $('#loading').hide();
+    if( o['taninmayan'] != 0 ){
+      $('#taninmayan').append(o['taninmayan'] + " kişi tanınamadı.");
+    }
+    var table = new Tabulator("#example-table", {
+      data:o['students'],           //load row data from array
+      layout:"fitColumns",      //fit columns to width of table
+      responsiveLayout:"hide",  //hide columns that dont fit on the table
+      tooltips:true,            //show tool tips on cells
+      addRowPos:"top",          //when adding a new row, add it to the top of the table
+      history:true,             //allow undo and redo actions on the table
+      pagination:"local",       //paginate the data
+      paginationSize:7,         //allow 7 rows per page of data
+      movableColumns:true,      //allow column order to be changed
+      resizableRows:true,       //allow row order to be changed
+      initialSort:[             //set the initial sort order of the data
+        {column:"name", dir:"asc"},
+      ],
+      columns:[                 //define the table columns  
+        {title:"ID", field:"id", editor:"input"},
+        {title:"Numarası", field:"number", editor:"input"},
+        {title:"Adı", field:"name", editor:"input"},
+        {title:"Soyadı", field:"surname", editor:"input"},
+        {title:"Benzetme Oranı", field:"rate", align:"left", formatter:"progress", editor:true},
+      ],
+    });
   });
 });
 </script>

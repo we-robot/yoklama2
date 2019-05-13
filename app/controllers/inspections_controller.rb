@@ -88,15 +88,38 @@ class InspectionsController < ApplicationController
 
     active_storage_disk_service = ActiveStorage::Service::DiskService.new(root: Rails.root.to_s + '/storage/')
     student_nos = FaceRecognition.identify(active_storage_disk_service.send(:path_for, @inspection.image.blob.key))
-
+    rates = student_nos[1]
+    taninmayan = student_nos.last
     student_nos = student_nos.first
     @ogrenciler = []
-    student_nos.each do |e|
-      @ogrenciler << Students.find_by(number: e)
+    student_nos.each_with_index do |e, index|
+      student = Student.find_by(number: e.to_i)
+      student.rate = rates[index] * 100 unless student.nil?
+      @ogrenciler << student unless student.nil?
     end
-    efewefewf
-    render json: { image: url_for(@inspection.image), students: @ogrenciler }
+
+    begin
+      @inspection.image.attach(io: File.open("/home/ramazhan007/Desktop/tanima/result.jpg"), filename: 'test.jpg', content_type: 'image/jpg')
+    rescue
+      puts "hata çıktı önemsiz"
+    end
+    render json: { image: url_for(@inspection.image), students: @ogrenciler, taninmayan: taninmayan }
   end
+
+  def yoklama_kaydet
+    @inspection = Inspection.find(params[:inspection_id])
+    unless params['students'].empty?
+      student_ids = params['students'].split(',') 
+      student_ids.each do |student_id|
+        student = Student.find(student_id)
+        @inspection.students << student
+      end
+    end
+    @inspection.save!
+    flash[:success] = "Öğrenciler Başarıyla yoklamaya Eklendi"
+    redirect_to inspection_path(@inspection.id)
+  end
+
   def fotograf_cek
     @inspection = Inspection.new()
   end

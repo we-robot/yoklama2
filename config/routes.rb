@@ -87,5 +87,5 @@ Rails.application.routes.draw do
   post 'inspections/:lesson_id/inspection', to: 'inspections#yoklama', as: 'yoklama'
   get 'inspections/:inspection_id/cek', to: 'inspections#fotograf_cek', as: 'fotograf_cek'
   post 'inspections/:inspection_id/tani', to: 'inspections#tani', as: 'tani'
-
+  get 'inspections/:inspection_id/kaydet/:students', to: 'inspections#yoklama_kaydet', as:'yoklama_kaydet'
 end
