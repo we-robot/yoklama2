@@ -9,10 +9,10 @@
     = f.input :number, label: "Numarası"
     = f.association :lessons,
                     as: :check_boxes,
-                    collection: Lesson.all, 
+                    collection: Lesson.all,
                     value_method: :id,
                     label_method: :adi,
                     prompt: "Dersleri Seçiniz"
 
   .form-actions
-    = f.button :submit, label: "Ekle"
+    = f.button :submit, value: "Ekle", class: "btn btn-primary"

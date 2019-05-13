@@ -4,12 +4,12 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :adi
+    = f.input :adi, label: "Adı"
     = f.input :ders_kodu
-    = f.input :sinif
+    = f.input :sinif, label: "Sınıf"
     = f.input :teorik_saat
     = f.input :uygulama_saati
     = f.input :akts
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, value: "Ekle", class: "btn btn-primary"

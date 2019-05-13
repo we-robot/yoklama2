@@ -147,3 +147,6 @@ group :development do
   gem 'pronto-poper', require: false
   gem 'pronto-rubocop', require: false
 end
+
+
+gem 'active_storage_base64'

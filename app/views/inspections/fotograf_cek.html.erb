@@ -32,10 +32,10 @@ document.getElementById("snap").addEventListener("click", function() {
     type: "POST",
     url: "/inspections/<%= params[:inspection_id] %>/tani",
     data: {
-       imgBase64: dataURL
+       image: dataURL
     }
   }).done(function(o) {
-    console.log('saved');
+    console.log(o);
   });
 });
 </script>

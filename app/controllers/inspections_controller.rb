@@ -1,3 +1,5 @@
+require "FaceRecognition"
+
 class InspectionsController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
 
@@ -21,7 +23,13 @@ class InspectionsController < ApplicationController
   end
 
   def create
-    redirect_to select_week_path(inspection_params[:lesson_id])
+    @inspection = Inspection.new
+    if inspection_params[:lesson_id].empty?
+      flash[:error] = "Ders Seçmediniz."
+      render :new
+    else
+      redirect_to select_week_path(inspection_params[:lesson_id])
+    end
   end
 
   def update
@@ -60,8 +68,34 @@ class InspectionsController < ApplicationController
     @uygulama   = @inspection.lesson.uygulama_saati
   end
   def tani
-    puts params
-    render json: { sonuc: "Tanıdı" }
+    @inspection = Inspection.find(params[:inspection_id])
+
+    puts params.keys
+    dataURL = params[:image]
+
+    start = dataURL.index(',') + 1                   # .index used here
+    x = Base64.decode64 dataURL[start..-1]
+    File.open('test.png','wb') do |file|
+      file.write x
+    end
+    begin
+      @inspection.image.attach(io: File.open("test.png"), filename: 'test.png', content_type: 'image/png')
+    rescue
+      puts "hata çıktı önemsiz"
+    end
+
+    @inspection.save!
+
+    active_storage_disk_service = ActiveStorage::Service::DiskService.new(root: Rails.root.to_s + '/storage/')
+    student_nos = FaceRecognition.identify(active_storage_disk_service.send(:path_for, @inspection.image.blob.key))
+
+    student_nos = student_nos.first
+    @ogrenciler = []
+    student_nos.each do |e|
+      @ogrenciler << Students.find_by(number: e)
+    end
+    efewefewf
+    render json: { image: url_for(@inspection.image), students: @ogrenciler }
   end
   def fotograf_cek
     @inspection = Inspection.new()
