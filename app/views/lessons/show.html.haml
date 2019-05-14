@@ -1,11 +1,48 @@
-= show_for(@lesson) do |s|
-  = s.attribute :adi
-  = s.attribute :ders_kodu
-  = s.attribute :sinif
-  = s.attribute :teorik_saat
-  = s.attribute :uygulama_saati
-  = s.attribute :akts
+:css
+  .demo-card-wide.mdl-card {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .buyuk{
+    width: 1000px !important;
+  }
+  .ortala{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-= link_to 'Düzenle', edit_lesson_path(@lesson)
-|
-= link_to 'Geri', lessons_path
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  .bosluk{
+    margin-top: 60px;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
+  .mdl-card__title
+    %h2.mdl-card__title-text Yeni Ders
+  .mdl-card__supporting-text
+    %div
+      = show_for(@lesson) do |s|
+        = s.attribute :adi
+        %br
+        = s.attribute :ders_kodu
+        %br
+        = s.attribute :sinif
+        %br
+        = s.attribute :teorik_saat
+        %br
+        = s.attribute :uygulama_saati
+        %br
+        = s.attribute :akts
+        %br
+    %br
+    %br
+
+    = link_to 'Geri', lessons_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'

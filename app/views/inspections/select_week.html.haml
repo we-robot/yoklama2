@@ -1,21 +1,47 @@
-%h1 Yoklama Al
-= simple_form_for(@inspection, url: yoklama_path(params[:lesson_id]), method: :post) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+:css
+  .demo-card-wide.mdl-card {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-  .form-nputs
-    = f.input :week, collection: (1..14), prompt: "Yoklama alınacak Haftayı seçiniz."
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp
+  .mdl-card__title
+    %h2.mdl-card__title-text Ders Ayrıntıları
+  = simple_form_for(@inspection, url: yoklama_path(params[:lesson_id]), method: :post) do |f|
+    .mdl-card__supporting-text
+      Yoklama almak için öncelikle dersi seçmelisiniz.
+      %br
 
-    = f.input :lesson_type, as: :radio_buttons, collection: ["Teorik", "Uygulama"], prompt: "Ders Tipini Seçiniz."
+      = f.error_notification
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-    #teorik
-      = f.input :teorik_saat, collection: 1..@teorik, prompt: "Kaçıncı Ders Saati"
-    #uygulama
-      = f.input :uygulama_saati, collection: 1..@uygulama, prompt: "Kaçıncı Ders Saati"
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.input :week, label: false, collection: (1..14), input_html: { class: 'mdl-textfield__input' }
+        %label.mdl-textfield__label{:for => "inspection_week"} Haftayı Seçiniz
+      = f.input :lesson_type, label: "Ders Tipi", as: :radio_buttons, collection: ["Teorik", "Uygulama"], prompt: "Ders Tipini Seçiniz.", default: 0
 
-    = f.button :submit, class: 'btn btn-primary'
+      #teorik
+        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.input :teorik_saat, collection: 1..@teorik, label: false, input_html: { class: 'mdl-textfield__input' }
+          %label.mdl-textfield__label{:for => "inspection_teorik_saat"} Ders Saati
+      #uygulama
+        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+          = f.input :uygulama_saati, collection: 1..@uygulama, label: false, input_html: { class: 'mdl-textfield__input' }
+          %label.mdl-textfield__label{:for => "inspection_uygulama_saati"} Ders Saati
+    .mdl-card__actions.mdl-card--border
+      = f.button :submit, value: "İleri", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'
 
 :javascript
+  $('#uygulama').hide();
   $('#inspection_lesson_type_teorik').click(function(){
     $('#teorik').show();
     $('#uygulama').hide();

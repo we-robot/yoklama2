@@ -4,12 +4,37 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :adi, label: "Adı"
-    = f.input :ders_kodu
-    = f.input :sinif, label: "Sınıf"
-    = f.input :teorik_saat
-    = f.input :uygulama_saati
-    = f.input :akts
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :adi, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_adi'} Ders Adı
+    %br
+
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :ders_kodu, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_ders_kodu'} Ders Kodu (BMU111 gibi)
+    %br
+
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :sinif, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_sinif'} Sınıf
+    %br
+
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :teorik_saat, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_teorik_saat'} Haftalık Teorik Saati
+    %br
+
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :uygulama_saati, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_uygulama_saati'} Haftalık Uygulama Saati
+    %br
+
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :akts, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'lesson_akts'} Akts
+    %br
 
   .form-actions
-    = f.button :submit, value: "Ekle", class: "btn btn-primary"
+    = f.button :submit, value: "Ekle", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored"
+
+  %hr

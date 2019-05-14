@@ -1,5 +1,78 @@
-= image_tag @inspection.image
+:css
+  .demo-card-wide.mdl-card {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .buyuk{
+    width: 1000px !important;
+  }
+  .ortala{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-= link_to 'Edit', edit_inspection_path(@inspection)
-|
-= link_to 'Back', inspections_path
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  .bosluk{
+    margin-top: 60px;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
+  .mdl-card__title
+    %h2.mdl-card__title-text Yoklama Görüntüle
+  .mdl-card__supporting-text
+    %b
+      = @inspection.lesson.adi
+    dersi için,
+    %b
+      = @inspection.week
+    \. haftadaki
+    %b
+      = @inspection.lesson_type
+    türündeki dersin
+    %b
+      = @inspection.hour
+    saatindeki yoklaması aşağıdaki gibidir.
+    %br
+    %br
+
+    %div
+      #example-table{:style => "margin-left: auto;margin-right: auto;"}
+      %br/
+      #taninmayan{:style => "margin-left: auto;margin-right: auto;"}
+      %br/
+      %center
+        %img#yoklama_img{:alt => "", :src => ""}/
+        = image_tag @inspection.image
+
+:javascript
+  var o = JSON.parse('#{@students.to_json.html_safe}');
+  console.log(o);
+  var table = new Tabulator("#example-table", {
+    data: o,           //load row data from array
+    layout:"fitColumns",      //fit columns to width of table
+    responsiveLayout:"hide",  //hide columns that dont fit on the table
+    tooltips:true,            //show tool tips on cells
+    addRowPos:"top",          //when adding a new row, add it to the top of the table
+    history:true,             //allow undo and redo actions on the table
+    pagination:"local",       //paginate the data
+    paginationSize:7,         //allow 7 rows per page of data
+    movableColumns:true,      //allow column order to be changed
+    resizableRows:true,       //allow row order to be changed
+    initialSort:[             //set the initial sort order of the data
+      {column:"name", dir:"asc"},
+    ],
+    columns:[                 //define the table columns
+      {title:"Numarası", field:"number", editor:"input"},
+      {title:"Adı", field:"name", editor:"input"},
+      {title:"Soyadı", field:"surname", editor:"input"},
+      {title:"Benzetme Oranı", field:"rate", align:"left", formatter:"progress", editor:true},
+    ],
+  });

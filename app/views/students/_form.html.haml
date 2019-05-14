@@ -4,10 +4,20 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :name, label: "Adı"
-    = f.input :surname, label: "Soyadı"
-    = f.input :number, label: "Numarası"
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :name, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'student_name'} Adı
+    %br
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :surname, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'student_surname'} Soyadı
+    %br
+    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+      = f.input :number, label: false, input_html: { class: 'mdl-textfield__input' }
+      %label.mdl-textfield__label{for: 'student_number'} Numarası
+    %br
     = f.association :lessons,
+                    label: 'Aldığı Dersler',
                     as: :check_boxes,
                     collection: Lesson.all,
                     value_method: :id,
@@ -15,4 +25,6 @@
                     prompt: "Dersleri Seçiniz"
 
   .form-actions
-    = f.button :submit, value: "Ekle", class: "btn btn-primary"
+    = f.button :submit, value: "Ekle", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored"
+
+  %hr      

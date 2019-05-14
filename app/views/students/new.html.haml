@@ -1,5 +1,36 @@
-%h1 Yeni Öğrenci
+:css
+  .demo-card-wide.mdl-card {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .buyuk{
+    width: 1000px !important;
+  }
+  .ortala{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-= render 'form'
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  .bosluk{
+    margin-top: 60px;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
+  .mdl-card__title
+    %h2.mdl-card__title-text Yeni Öğrenci
+  .mdl-card__supporting-text
+    %div
+      = render 'form'
+    %br
+    %br
 
-= link_to 'Geri', students_path
+    = link_to 'Geri', students_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'

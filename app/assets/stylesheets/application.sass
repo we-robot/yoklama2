@@ -10,8 +10,6 @@
  *
  *= require_self
 
-@import "bootstrap"
-
 /* from vendor
 @import "nprogress"
 @import "trix"
@@ -20,8 +18,8 @@
 /* Custom container
 
 body
-  padding-top: 1.5rem
-  padding-bottom: 1.5rem
+  padding-top: 0px
+  padding-bottom: 0px
 
 .container-narrow
   margin: 0 auto
@@ -66,3 +64,51 @@ body
   margin: 60px 0
   p + h4
     margin-top: 28px
+
+$color_1: rgba(0,0,0,0.4)
+$color_2: #3f51b5
+$background_color_1: #ddd
+
+/*# sourceMappingURL=getmdl-select.min.css.map */
+.getmdl-select 
+	outline: none
+	.mdl-textfield__input
+		cursor: pointer
+
+	.selected
+		background-color: $background_color_1
+
+	.mdl-icon-toggle__label
+		float: right
+		margin-top: -30px
+		color: $color_1
+		transform: rotate(0)
+		transition: transform 0.3s
+
+	.mdl-menu__container
+		width: 100% !important
+		margin-top: 2px
+		.mdl-menu
+			width: 100%
+			.mdl-menu__item
+				font-size: 16px
+
+
+
+
+.getmdl-select.is-focused
+	.mdl-icon-toggle__label
+		color: $color_2
+		transform: rotate(180deg)
+
+
+.getmdl-select__fix-height
+	.mdl-menu__container
+		.mdl-menu
+			overflow-y: auto
+			max-height: 288px !important
+
+
+	.mdl-menu.mdl-menu--top-left
+		bottom: auto
+		top: 0

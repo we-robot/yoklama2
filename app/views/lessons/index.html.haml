@@ -1,31 +1,58 @@
-%h1 Dersler
+:css
+  .demo-card-wide.mdl-card {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .buyuk{
+    width: 1000px !important;
+  }
+  .ortala{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-%table
-  %thead
-    %tr
-      %th Ders Adı
-      %th Ders kodu
-      %th Sinif
-      %th Teorik saat
-      %th Uygulama saati
-      %th Akts
-      %th
-      %th
-      %th
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  .bosluk{
+    margin-top: 60px;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
+  .mdl-card__title
+    %h2.mdl-card__title-text Dersler
+  .mdl-card__supporting-text
+    %div
+      %table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+        %thead
+          %tr
+            %th Ders Adı
+            %th Ders kodu
+            %th Sinif
+            %th Teorik saat
+            %th Uygulama saati
+            %th Akts
+            %th Görüntüle
+            %th Düzenle
+            %th Sil
+        %tbody
+          - @lessons.each do |lesson|
+            %tr
+              %td= lesson.adi
+              %td.mdl-data-table__cell--non-numeric= lesson.ders_kodu
+              %td= lesson.sinif
+              %td= lesson.teorik_saat
+              %td= lesson.uygulama_saati
+              %td= lesson.akts
+              %td= link_to 'Görüntüle', lesson
+              %td= link_to 'Düzenle', edit_lesson_path(lesson)
+              %td= link_to 'Sil', lesson, method: :delete, data: { confirm: 'Are you sure?' }
+      %br
 
-  %tbody
-    - @lessons.each do |lesson|
-      %tr
-        %td= lesson.adi
-        %td= lesson.ders_kodu
-        %td= lesson.sinif
-        %td= lesson.teorik_saat
-        %td= lesson.uygulama_saati
-        %td= lesson.akts
-        %td= link_to 'Görüntüle', lesson
-        %td= link_to 'Düzenle', edit_lesson_path(lesson)
-        %td= link_to 'Sil', lesson, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'Yeni Ders', new_lesson_path
+      = link_to 'Yeni Ders', new_lesson_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'

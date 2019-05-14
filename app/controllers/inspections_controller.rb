@@ -11,6 +11,7 @@ class InspectionsController < ApplicationController
   end
 
   def show
+    @students = @inspection.students
     respond_with(@inspection)
   end
 
@@ -70,7 +71,6 @@ class InspectionsController < ApplicationController
   def tani
     @inspection = Inspection.find(params[:inspection_id])
 
-    puts params.keys
     dataURL = params[:image]
 
     start = dataURL.index(',') + 1                   # .index used here
@@ -99,7 +99,7 @@ class InspectionsController < ApplicationController
     end
 
     begin
-      @inspection.image.attach(io: File.open("/home/ramazhan007/Desktop/tanima/result.jpg"), filename: 'test.jpg', content_type: 'image/jpg')
+      @inspection.image.attach(io: File.open("/home/alperen/Desktop/tanima/result.jpg"), filename: 'test.jpg', content_type: 'image/jpeg')
     rescue
       puts "hata çıktı önemsiz"
     end
@@ -109,7 +109,7 @@ class InspectionsController < ApplicationController
   def yoklama_kaydet
     @inspection = Inspection.find(params[:inspection_id])
     unless params['students'].empty?
-      student_ids = params['students'].split(',') 
+      student_ids = params['students'].split(',')
       student_ids.each do |student_id|
         student = Student.find(student_id)
         @inspection.students << student

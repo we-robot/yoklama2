@@ -1,13 +1,33 @@
-%h1 New inspection
 
-= simple_form_for(@inspection) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+:css
+  .demo-card-wide.mdl-card {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-  .form-inputs
-    = f.association :lesson, label: "Ders", prompt: "Bir ders seçiniz:", required: true
-  .form-actions
-    = f.button :submit, value: "İleri", class: 'btn btn-primary'
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp
+  .mdl-card__title
+    %h2.mdl-card__title-text Yoklama Al
+  = simple_form_for(@inspection) do |f|
+    .mdl-card__supporting-text
+      Yoklama almak için öncelikle dersi seçmelisiniz.
+      %br
 
+      = f.error_notification
+      = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-= link_to 'Back', inspections_path
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+        = f.association :lesson, label: false, input_html: { class: 'mdl-textfield__input' }
+        %label.mdl-textfield__label{:for => "inspection_lesson_id"} Ders Seçiniz
+
+    .mdl-card__actions.mdl-card--border
+      = f.button :submit, value: "İleri", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'
