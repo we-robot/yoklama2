@@ -12,6 +12,9 @@
   .collapse.navbar-collapse#navbar-nav-dropdown
     %ul.navbar-nav.ml-auto
       %li.nav-item
+        = link_to new_inspection_path, class: 'nav-link' do
+          = "Yoklama Al"
+      %li.nav-item
         = link_to new_student_path, class: 'nav-link' do
           = "Yeni Öğrenci"
       %li.nav-item
