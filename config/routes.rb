@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   end
 
   # Common pages
-  root to: 'inspection#new'
+  root to: 'inspections#new'
 
   resources :welcome, path: '', only: %i[index] do
     get :about, on: :collection

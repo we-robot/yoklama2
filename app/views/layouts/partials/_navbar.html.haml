@@ -4,6 +4,7 @@
 .mdl-layout__drawer
   %span.mdl-layout-title Yoklama Al
   %nav.mdl-navigation
+    = link_to "Yoklamalar", inspections_path, class: "mdl-navigation__link"
     = link_to "Yoklama Al", new_inspection_path, class: "mdl-navigation__link"
     = link_to "Dersler", lessons_path, class: "mdl-navigation__link"
     = link_to "Ogrenciler", students_path, class: "mdl-navigation__link"

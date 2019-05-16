@@ -99,7 +99,7 @@ class InspectionsController < ApplicationController
     end
 
     begin
-      @inspection.image.attach(io: File.open("/home/alperen/Desktop/tanima/result.jpg"), filename: 'test.jpg', content_type: 'image/jpeg')
+      @inspection.image.attach(io: File.open("/home/ramazhan007/Desktop/tanima/result.jpg"), filename: 'test.jpg', content_type: 'image/jpeg')
     rescue
       puts "hata çıktı önemsiz"
     end

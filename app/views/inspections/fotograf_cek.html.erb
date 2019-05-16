@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-          <a href="" id="yoklama_kaydet snap" class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'>Yoklamayı Kaydet</a>
+          <a href="" id="yoklama_kaydet" class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--colored'>Yoklamayı Kaydet</a>
         </div>
       </div>
   </div>
@@ -105,6 +105,7 @@ document.getElementById("snap").addEventListener("click", function() {
     for(var student in students) {
       link_text += students[student].id + ",";
     }
+    console.log(link_text.substring(0, link_text.length-1));
     $("#yoklama_kaydet").attr("href",link_text.substring(0, link_text.length-1));
 
     $("#yoklama_img").attr("src",o['image']);

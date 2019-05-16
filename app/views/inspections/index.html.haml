@@ -1,21 +1,71 @@
-%h1 Listing inspections
+:css
+  .demo-card-wide.mdl-card {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .buyuk{
+    width: 1000px !important;
+  }
+  .ortala{
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    background: #3f51b4
 
-%table
-  %thead
-    %tr
-      %th Lesson
-      %th
-      %th
-      %th
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+  .bosluk{
+    margin-top: 60px;
+  }
+.demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
+  .mdl-card__title
+    %h2.mdl-card__title-text Öğrenciler
+  .mdl-card__supporting-text
+    %div
+      %table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+        %thead
+          %tr
 
-  %tbody
-    - @inspections.each do |inspection|
-      %tr
-        %td= inspection.lesson
-        %td= link_to 'Show', inspection
-        %td= link_to 'Edit', edit_inspection_path(inspection)
-        %td= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' }
+            %th
+            %th
+            %th
+            %th
+            %th Ders
+            %th Ders Tipi
+            %th Ders Saati
+            %th
+            %th
+            %th
+            %th
+            %th
+            %th
+            %th
+            %th
+            %th
+            %th
+        %tbody
+          - @inspections.each do |inspection|
+            %tr
+              %td
+              %td
+              %td
+              %td
+              %td= inspection.lesson.adi
+              %td= inspection.lesson_type
+              %td= inspection.hour
+              %td= link_to 'Show', inspection
+              %td= link_to 'Edit', edit_inspection_path(inspection)
+              %td= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' }
+              %td
+              %td
+              %td
+              %td
+      %br
 
-%br
-
-= link_to 'New Inspection', new_inspection_path

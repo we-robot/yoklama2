@@ -3,7 +3,7 @@ class FaceRecognition
     puts image
     system('cp "' + image + '" /tmp/deneme.jpg')
 
-    print `/home/alperen/Desktop/tanima/a.sh &`
+    print `/home/ramazhan007/Desktop/tanima/a.sh &`
     taninmayan = 0
     taninan_kisiler = []
     oranlar = []
