@@ -26,53 +26,39 @@
   }
 .demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
   .mdl-card__title
-    %h2.mdl-card__title-text Yoklama Görüntüle
+    %h2.mdl-card__title-text Öğrenciler
   .mdl-card__supporting-text
-    %b
-      = @inspection.lesson.adi
-    dersi için,
-    %b
-      = @inspection.week
-    \. haftadaki
-    %b
-      = @inspection.lesson_type
-    türündeki dersin
-    %b
-      = @inspection.hour
-    saatindeki yoklaması aşağıdaki gibidir.
-    %br
-    %br
-
     %div
-      #example-table{:style => "margin-left: auto;margin-right: auto;"}
-      %br/
-      #taninmayan{:style => "margin-left: auto;margin-right: auto;"}
-      %br/
-      %center
-        %img#yoklama_img{:alt => "", :src => ""}/
-        = image_tag @inspection.image
-
-:javascript
-  var o = JSON.parse('#{@students.to_json.html_safe}');
-  console.log(o);
-  var table = new Tabulator("#example-table", {
-    data: o,           //load row data from array
-    layout:"fitColumns",      //fit columns to width of table
-    responsiveLayout:"hide",  //hide columns that dont fit on the table
-    tooltips:true,            //show tool tips on cells
-    addRowPos:"top",          //when adding a new row, add it to the top of the table
-    history:true,             //allow undo and redo actions on the table
-    pagination:"local",       //paginate the data
-    paginationSize:7,         //allow 7 rows per page of data
-    movableColumns:true,      //allow column order to be changed
-    resizableRows:true,       //allow row order to be changed
-    initialSort:[             //set the initial sort order of the data
-      {column:"name", dir:"asc"},
-    ],
-    columns:[                 //define the table columns
-      {title:"Numarası", field:"number", editor:"input"},
-      {title:"Adı", field:"name", editor:"input"},
-      {title:"Soyadı", field:"surname", editor:"input"},
-      {title:"Benzetme Oranı", field:"rate", align:"left", formatter:"progress", editor:true},
-    ],
-  });
+      %table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+        %thead
+          %tr
+            %th
+            %th
+            %th
+            %th
+            %th Öğrenci
+            %th Katılınan Yoklama Saati
+            %th Toplam Devamsızlık
+            %th Toplam Saat
+            %th Geçiş Durumu
+            %th
+            %th
+            %th
+            %th
+        %tbody
+          - @devam_saatleri.each do |student|
+            %tr
+              %td
+              %td
+              %td
+              %td
+              %td= student.first.name
+              %td= student.last
+              %td= (@toplam_yoklama_saati - student.last)
+              %td= @toplam_yoklama_saati
+              %td= ((@toplam_yoklama_saati * 30) / 100.0) > @toplam_yoklama_saati - student.last ? "Geçti" : "Kaldı"
+              %td
+              %td
+              %td
+              %td
+      %br

@@ -6,13 +6,21 @@ class InspectionsController < ApplicationController
   respond_to :html
 
   def index
-    @inspections = Inspection.all
+    @inspections = Inspection.group('lesson_id').count
     respond_with(@inspections)
   end
 
   def show
-    @students = @inspection.students
-    respond_with(@inspection)
+    @inspections = Inspection.where(lesson_id: 1)
+    @students = []
+    @inspections.each do |inspection|
+      inspection.students.each do |student|
+        @students << student
+      end
+    end
+    @devam_saatleri = Hash[@students.uniq.map{ |i| [i, @students.count(i)] }]
+    @toplam_yoklama_saati = Inspection.where(lesson_id: 1).count
+    respond_with(@students)
   end
 
   def new

@@ -26,20 +26,18 @@
   }
 .demo-card-wide.mdl-card.mdl-shadow--2dp.buyuk
   .mdl-card__title
-    %h2.mdl-card__title-text Öğrenciler
+    %h2.mdl-card__title-text Dersler
   .mdl-card__supporting-text
     %div
       %table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
         %thead
           %tr
-
             %th
             %th
             %th
             %th
             %th Ders
-            %th Ders Tipi
-            %th Ders Saati
+            %th
             %th
             %th
             %th
@@ -51,21 +49,22 @@
             %th
             %th
         %tbody
-          - @inspections.each do |inspection|
+          - @inspections.each_pair do |name, val|
             %tr
               %td
               %td
               %td
               %td
-              %td= inspection.lesson.adi
-              %td= inspection.lesson_type
-              %td= inspection.hour
-              %td= link_to 'Show', inspection
-              %td= link_to 'Edit', edit_inspection_path(inspection)
-              %td= link_to 'Destroy', inspection, method: :delete, data: { confirm: 'Are you sure?' }
+              %td= Lesson.find(name).adi
+              %td
+              %td
+              %td
+              %td
+              %td
+              %td
+              %td= link_to 'Görüntüle', inspection_path(name)
               %td
               %td
               %td
               %td
       %br
-
