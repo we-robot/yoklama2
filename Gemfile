@@ -101,7 +101,7 @@ end
 gem 'rails-i18n', '~> 5.1'
 
 # Flexible authentication solution for Rails with Warden
-gem 'devise', '~> 4.5'
+gem 'devise', '~> 4.7'
 
 # Audited is an ORM extension that logs all changes to your models
 gem 'audited', '~> 4.8'
