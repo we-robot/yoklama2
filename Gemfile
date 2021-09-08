@@ -91,7 +91,7 @@ gem 'roo-xls', '~> 1.1'
 gem 'roo', '~> 2.7', '>= 2.7.1'
 
 group :development, :test do
-  gem 'better_errors', '~> 2.5'
+  gem 'better_errors', '~> 2.8'
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'bullet', '~> 5.9'
   gem 'colorize', '~> 0.8.1'
