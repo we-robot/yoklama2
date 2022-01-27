@@ -127,7 +127,7 @@ gem 'breadcrumbs_on_rails', '~> 3.0', '>= 3.0.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 # Use Sidekiq as a background job processor through Active Job
-gem 'sidekiq', '~> 5.1', '>= 5.1.3'
+gem 'sidekiq', '~> 6.4'
 gem 'sidekiq-cron', '~> 0.6.3'
 # Cocaine run bash commands with ruby. Required for sidekiq start commands
 gem 'cocaine', '~> 0.5.8'
